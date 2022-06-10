@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math' as math;
 
 import 'package:chewie/src/center_play_button.dart';
 import 'package:chewie/src/chewie_player.dart';
@@ -276,6 +277,14 @@ class _MaterialControlsState extends State<MaterialControls>
                       _buildPosition(iconColor),
                     if (chewieController.allowMuting)
                       _buildMuteButton(controller),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    _buildSkipBack(),
+                    const SizedBox(
+                      width: 20,
+                    ),
+                    _buildSkipForward(),
                     const Spacer(),
                     if (chewieController.allowFullScreen) _buildExpandButton(),
                   ],
@@ -333,6 +342,68 @@ class _MaterialControlsState extends State<MaterialControls>
         ),
       ),
     );
+  }
+
+  GestureDetector _buildSkipBack() {
+    return GestureDetector(
+      onTap: _skipBack,
+      child: Container(
+        height: barHeight + (chewieController.isFullScreen ? 15.0 : 0),
+        color: Colors.transparent,
+        margin: const EdgeInsets.only(left: 10.0),
+        padding: const EdgeInsets.only(
+          left: 6.0,
+          right: 6.0,
+        ),
+        child: const Icon(Icons.fast_rewind_rounded, color: Colors.white),
+      ),
+    );
+  }
+
+  GestureDetector _buildSkipForward() {
+    return GestureDetector(
+      onTap: _skipForward,
+      child: Container(
+        height: barHeight + (chewieController.isFullScreen ? 15.0 : 0),
+        color: Colors.transparent,
+        padding: const EdgeInsets.only(
+          left: 6.0,
+          right: 8.0,
+        ),
+        margin: const EdgeInsets.only(
+          right: 8.0,
+        ),
+        child: const Icon(Icons.fast_forward_rounded, color: Colors.white),
+      ),
+    );
+  }
+
+  void _skipBack() async {
+    _cancelAndRestartTimer();
+    final beginning = Duration.zero.inMilliseconds;
+    final skip =
+        (_latestValue.position - const Duration(seconds: 10)).inMilliseconds;
+    controller.seekTo(Duration(milliseconds: math.max(skip, beginning)));
+
+    Duration? pos = await controller.position;
+
+    print("Current Position:" + pos.toString());
+
+    List? qualities = await controller.qualities;
+
+    if (qualities != null) {
+      print(qualities);
+    } else {
+      print("No Qualities");
+    }
+  }
+
+  void _skipForward() {
+    _cancelAndRestartTimer();
+    final end = _latestValue.duration.inMilliseconds;
+    final skip =
+        (_latestValue.position + const Duration(seconds: 10)).inMilliseconds;
+    controller.seekTo(Duration(milliseconds: math.min(skip, end)));
   }
 
   GestureDetector _buildExpandButton() {
