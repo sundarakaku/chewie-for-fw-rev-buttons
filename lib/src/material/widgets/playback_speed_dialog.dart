@@ -40,6 +40,7 @@ class PlaybackSpeedDialog extends StatelessWidget {
           selected: _speed == _selected,
           onTap: () {
             Navigator.of(context).pop(_speed);
+            Navigator.pop(context);
           },
         );
       },
