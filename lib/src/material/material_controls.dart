@@ -164,7 +164,7 @@ class _MaterialControlsState extends State<MaterialControls>
     final options = <OptionItem>[
       OptionItem(
         onTap: () async {
-          Navigator.pop(context);
+         // Navigator.pop(context);
           _onSpeedButtonTap();
         },
         iconData: Icons.speed,
