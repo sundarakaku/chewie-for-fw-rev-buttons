@@ -164,7 +164,7 @@ class _MaterialControlsState extends State<MaterialControls>
     final options = <OptionItem>[
       OptionItem(
         onTap: () async {
-         // Navigator.pop(context);
+          // Navigator.pop(context);
           _onSpeedButtonTap();
         },
         iconData: Icons.speed,
@@ -456,7 +456,7 @@ class _MaterialControlsState extends State<MaterialControls>
         }
       },
       child: CenterPlayButton(
-        backgroundColor: Colors.black54,
+        backgroundColor: Colors.transparent,
         iconColor: Colors.white,
         isFinished: isFinished,
         isPlaying: controller.value.isPlaying,

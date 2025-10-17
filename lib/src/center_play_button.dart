@@ -33,11 +33,11 @@ class CenterPlayButton extends StatelessWidget {
               shape: BoxShape.circle,
             ),
             child: Padding(
-              padding: const EdgeInsets.all(6.0),
+              padding: const EdgeInsets.all(12.0),
               // Always set the iconSize on the IconButton, not on the Icon itself:
               // https://github.com/flutter/flutter/issues/52980
               child: IconButton(
-                iconSize: 26,
+                iconSize: 32,
                 icon: isFinished
                     ? Icon(Icons.replay, color: iconColor)
                     : AnimatedPlayPause(
