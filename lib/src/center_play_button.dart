@@ -32,21 +32,28 @@ class CenterPlayButton extends StatelessWidget {
               color: backgroundColor,
               shape: BoxShape.circle,
             ),
-            child: GestureDetector(
-              onTap: onPressed,
-              behavior: HitTestBehavior.translucent,
-              child: Padding(
-                padding: const EdgeInsets.all(12.0),
-                child: SizedBox(
-                  width: 48,
-                  height: 48,
-                  child: Center(
-                    child: isFinished
-                        ? Icon(Icons.replay, color: iconColor, size: 32)
-                        : AnimatedPlayPause(
-                            color: iconColor,
-                            playing: isPlaying,
-                          ),
+            child: Material(
+              color: Colors.transparent,
+              shape: const CircleBorder(),
+              clipBehavior: Clip.hardEdge,
+              child: InkWell(
+                onTap: onPressed,
+                splashColor: Colors.transparent,
+                highlightColor: Colors.transparent,
+                hoverColor: Colors.transparent,
+                child: Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: SizedBox(
+                    width: 48,
+                    height: 48,
+                    child: Center(
+                      child: isFinished
+                          ? Icon(Icons.replay, color: iconColor, size: 32)
+                          : AnimatedPlayPause(
+                              color: iconColor,
+                              playing: isPlaying,
+                            ),
+                    ),
                   ),
                 ),
               ),
